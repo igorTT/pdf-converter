@@ -184,7 +184,6 @@ The application uses GitHub Actions for continuous integration:
 - **Test Workflow**: Runs automatically on pushes to main branch and pull requests
 
   - Executes the test suite using Jest
-  - Reports test coverage
 
 - **Cross-Platform Tests**: Available as a manual workflow
 
