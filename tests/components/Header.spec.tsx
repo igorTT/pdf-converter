@@ -16,7 +16,7 @@ describe('Header Component', () => {
 
     // Assert
     expect(screen.getByText('Test App')).toBeInTheDocument();
-    expect(screen.getByText('Version 1.0.0')).toBeInTheDocument();
+    expect(screen.getByText('v1.0.0')).toBeInTheDocument();
   });
 
   it('should update displayed information when app info changes', () => {
@@ -35,7 +35,7 @@ describe('Header Component', () => {
 
     // Assert
     expect(screen.getByText('Updated App')).toBeInTheDocument();
-    expect(screen.getByText('Version 2.0.0')).toBeInTheDocument();
+    expect(screen.getByText('v2.0.0')).toBeInTheDocument();
   });
 
   // Edge case: Empty strings for name and version
@@ -52,7 +52,7 @@ describe('Header Component', () => {
     // Assert
     const header = screen.getByRole('banner');
     expect(header).toBeInTheDocument();
-    expect(screen.getByText('Version')).toBeInTheDocument();
+    expect(screen.getByText('v')).toBeInTheDocument();
     // Check that we have empty content but the structure is maintained
     const h1Element = header.querySelector('h1');
     expect(h1Element).not.toBeNull();
@@ -80,9 +80,9 @@ describe('Header Component', () => {
     expect(headerTitle!.textContent!.length).toBe(1000);
 
     // Version info should also render
-    const versionText = screen.getByText(/Version/);
-    expect(versionText).toBeInTheDocument();
-    expect(versionText.textContent!.length).toBeGreaterThan(500); // "Version " + the long string
+    const versionElement = screen.getByText(/^v/);
+    expect(versionElement).toBeInTheDocument();
+    expect(versionElement.textContent!.length).toBeGreaterThan(500); // "v" + the long string
   });
 
   // Edge case: Special characters in app info
@@ -100,6 +100,6 @@ describe('Header Component', () => {
     expect(
       screen.getByText('特殊字符 & <script>alert("XSS")</script>')
     ).toBeInTheDocument();
-    expect(screen.getByText('Version 1.0.0-β&<>"\'')).toBeInTheDocument();
+    expect(screen.getByText('v1.0.0-β&<>"\'')).toBeInTheDocument();
   });
 });

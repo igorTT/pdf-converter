@@ -34,14 +34,14 @@ describe('SystemInfo Component', () => {
   it('should render loading state initially', () => {
     render(<SystemInfo />);
 
-    const loadingNode = screen.getByText(/Node\.js/i);
-    expect(loadingNode.textContent).toMatch(/Node\.js\s+Loading/i);
+    // Check for text labels
+    expect(screen.getByText('Node.js')).toBeInTheDocument();
+    expect(screen.getByText('Chromium')).toBeInTheDocument();
+    expect(screen.getByText('Electron')).toBeInTheDocument();
 
-    const loadingChrome = screen.getByText(/Chromium/i);
-    expect(loadingChrome.textContent).toMatch(/Chromium\s+Loading/i);
-
-    const loadingElectron = screen.getByText(/Electron/i);
-    expect(loadingElectron.textContent).toMatch(/Electron\s+Loading/i);
+    // Check for loading skeletons
+    const skeletons = document.querySelectorAll('.h-4.w-20');
+    expect(skeletons.length).toBe(3);
   });
 
   it('should update with system version information after loading', async () => {
@@ -53,15 +53,15 @@ describe('SystemInfo Component', () => {
     });
 
     // Check the node version is displayed
-    const nodeText = screen.getByText(/Node\.js/i);
-    expect(nodeText.textContent).toContain('20.19.0');
+    expect(screen.getByText('Node.js')).toBeInTheDocument();
+    expect(screen.getByText('20.19.0')).toBeInTheDocument();
 
     // Check Chromium and Electron version texts
-    const chromiumEl = screen.getByText(/Chromium/i);
-    expect(chromiumEl.textContent).toContain('108.0.0');
+    expect(screen.getByText('Chromium')).toBeInTheDocument();
+    expect(screen.getByText('108.0.0')).toBeInTheDocument();
 
-    const electronEl = screen.getByText(/Electron/i);
-    expect(electronEl.textContent).toContain('30.0.0');
+    expect(screen.getByText('Electron')).toBeInTheDocument();
+    expect(screen.getByText('30.0.0')).toBeInTheDocument();
   });
 
   // Edge case: Missing version data
@@ -106,10 +106,12 @@ describe('SystemInfo Component', () => {
     });
 
     // Should still be in loading state
-    const loadingNode = screen.getByText(/Node\.js/i);
-    expect(loadingNode.textContent).toMatch(/Node\.js\s+Loading/i);
+    expect(screen.getByText('Node.js')).toBeInTheDocument();
+    expect(screen.getByText('Chromium')).toBeInTheDocument();
+    expect(screen.getByText('Electron')).toBeInTheDocument();
 
-    const loadingChrome = screen.getByText(/Chromium/i);
-    expect(loadingChrome.textContent).toMatch(/Chromium\s+Loading/i);
+    // Check for loading skeletons
+    const skeletons = document.querySelectorAll('.h-4.w-20');
+    expect(skeletons.length).toBe(3);
   });
 });

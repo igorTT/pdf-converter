@@ -8,7 +8,7 @@ jest.mock('../src/components/Header', () => ({
   default: ({ appInfo }: { appInfo: { name: string; version: string } }) => (
     <header data-testid="mock-header">
       <h1>{appInfo.name}</h1>
-      <p>Version {appInfo.version}</p>
+      <p>v{appInfo.version}</p>
     </header>
   ),
 }));
@@ -46,9 +46,9 @@ describe('App Component', () => {
     expect(screen.getByTestId('mock-system-info')).toBeInTheDocument();
     expect(screen.getByTestId('mock-image-loader')).toBeInTheDocument();
     expect(screen.getByText('Electron React App')).toBeInTheDocument();
-    expect(screen.getByText('Version 1.0.0')).toBeInTheDocument();
+    expect(screen.getByText('v1.0.0')).toBeInTheDocument();
     expect(
-      screen.getByText('Built with Electron, React, and TypeScript')
+      screen.getByText('Built with Electron, React, TypeScript and shadcn/ui')
     ).toBeInTheDocument();
   });
 
@@ -81,11 +81,11 @@ describe('App Component', () => {
 
     // Assert
     // Check that the overall structure is maintained
-    const appContainer = screen
-      .getByText(/Built with Electron/i)
-      .closest('.app');
-    expect(appContainer).toBeInTheDocument();
-    expect(screen.getByText(/Built with Electron/i)).toBeInTheDocument();
+    const mainElement = screen.getByRole('main');
+    expect(mainElement).toBeInTheDocument();
+    expect(
+      screen.getByText('Built with Electron, React, TypeScript and shadcn/ui')
+    ).toBeInTheDocument();
 
     // Cleanup for other tests
     jest.resetModules();
@@ -99,7 +99,7 @@ describe('App Component', () => {
     };
 
     const TestAppWithErrorHandling = () => (
-      <div className="app">
+      <div className="min-h-screen flex flex-col">
         <div data-testid="test-header">Test Header</div>
         <main>
           <MockErrorComponent />
@@ -127,7 +127,7 @@ describe('App Component', () => {
   it('should handle complex DOM nesting', () => {
     // Arrange & Act
     const DeepNestedApp = () => (
-      <div className="app">
+      <div className="min-h-screen flex flex-col">
         <div data-testid="level-1">
           <div data-testid="level-2">
             <div data-testid="level-3">
