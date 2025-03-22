@@ -114,6 +114,16 @@ npm test
 
 See the [Testing Guide](docs/testing-guide.md) for more information about testing standards and practices.
 
+## Continuous Integration
+
+This project uses GitHub Actions for continuous integration. The following workflows are set up:
+
+- **Run Tests**: Runs tests automatically on the main branch and pull requests.
+- **Cross-Platform Tests**: Tests the application on Ubuntu, macOS, and Windows (manual trigger only).
+- **Build Electron App**: Builds the application and uploads artifacts (manual trigger only).
+
+You can view the workflow status in the GitHub Actions tab of the repository.
+
 ## Documentation
 
 Additional documentation is available in the `docs` directory:
