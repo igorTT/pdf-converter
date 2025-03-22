@@ -176,3 +176,23 @@ See [Testing Guide](testing-guide.md) for detailed testing guidelines.
 - The application requires Node.js v18.13.0 or higher
 - Using LTS/iron (v20.19.0) is recommended
 - The `.nvmrc` file can be used with nvm to automatically switch to the correct version
+
+## Continuous Integration
+
+The application uses GitHub Actions for continuous integration:
+
+- **Test Workflow**: Runs automatically on pushes to main branch and pull requests
+
+  - Executes the test suite using Jest
+  - Reports test coverage
+
+- **Cross-Platform Tests**: Available as a manual workflow
+
+  - Tests the application on Ubuntu, macOS, and Windows
+  - Ensures cross-platform compatibility
+
+- **Build Workflow**: Available as a manual workflow
+  - Builds the application
+  - Uploads build artifacts for inspection
+
+These workflows help maintain code quality and ensure the application functions correctly across different environments.
